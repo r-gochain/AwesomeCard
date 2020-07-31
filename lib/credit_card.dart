@@ -97,7 +97,9 @@ class _CreditCardState extends State<CreditCard>
   @override
   Widget build(BuildContext context) {
     widget.width == null
-        ? cardWidth = MediaQuery.of(context).size.width - 40
+        ? cardWidth = MediaQuery.of(context).size.width > 400
+            ? 400
+            : MediaQuery.of(context).size.width - 40
         : cardWidth = widget.width;
     widget.height == null
         ? cardHeight = (cardWidth / 2) + 10
@@ -159,7 +161,8 @@ class _CreditCardState extends State<CreditCard>
                         cardNumber: widget.cardNumber,
                         cardExpiry: widget.cardExpiry,
                         cardHolderName: widget.cardHolderName,
-                        cardTypeIcon: getCardTypeIcon(cardType: widget.cardType,
+                        cardTypeIcon: getCardTypeIcon(
+                            cardType: widget.cardType,
                             cardNumber: widget.cardNumber),
                         cardHeight: cardHeight,
                         cardWidth: cardWidth,
@@ -226,7 +229,7 @@ class AwesomeCard extends StatelessWidget {
       builder: (BuildContext context, Widget child) {
         return Transform(
           transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
+            ..setEntry(1, 2, 0.001)
             ..rotateY(animation.value),
           alignment: Alignment.center,
           child: this.child,
